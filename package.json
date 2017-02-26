@@ -1,0 +1,28 @@
+{
+  "name": "facebookbot1",
+  "version": "0.5.0",
+  "description": "facebook bot1",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "add later"
+  },
+  "keywords": [
+    "facebook",
+    "messenger",
+    "bot",
+    "nodejs",
+    "heroku"
+  ],
+  "author": "nandhini",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "express": "^4.14.1",
+    "fb": "^1.1.1",
+    "request": "^2.79.0"
+  }
+}
