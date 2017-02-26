@@ -117,7 +117,7 @@ function sendLocation(recipientId){
 	  }
 	  console.log(res.location);
 
-    var location = 'City : '+res.location.city+' latitute : '+res.location.latitute+' longitude : '+res.location.longitude;
+    var location = 'City : '+res.location.city+' latitute : '+res.location.latitude+' longitude : '+res.location.longitude;
 
     var messageData = {
     recipient: {
