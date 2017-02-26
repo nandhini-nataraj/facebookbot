@@ -115,9 +115,24 @@ function sendLocation(recipientId){
 	    console.log(!res ? 'error occurred' : res.error);
 	    return;
 	  }
-	  console.log(res.location.city);
+	  console.log(res.location);
+
+    var location = 'City : '+res.location.city+' latitute : '+res.location.latitute+' longitude : '+res.location.longitude;
+
+    var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      text: location
+    }
+  };
+
+  callSendAPI(messageData);
 	  });
 	})
+
+  
 }
 
 function sendTextMessage(recipientId, messageText) {	
