@@ -82,7 +82,9 @@ function receivedMessage(event) {
       case 'generic':
         sendGenericMessage(senderID);
         break;
-    
+      case 'location':
+        sendLocation(senderID);
+        break;
       default:
         sendTextMessage(senderID, messageText);
     }
