@@ -11,8 +11,6 @@ const access = process.env.FB_ACCESS_TOKEN
 const user_access_token=process.env.FB_USER_ACCESS_TOKEN
 var user_location = ''
 
-//app.set('port',(process.env.PORT || 5000))
-
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
