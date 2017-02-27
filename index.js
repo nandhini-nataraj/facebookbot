@@ -8,11 +8,20 @@ const app = express()
 
 const token = process.env.FB_VERIFY_TOKEN
 const access = process.env.FB_ACCESS_TOKEN
-const user_access_token=process.env.FB_USER_ACCESS_TOKEN
+//const user_access_token=process.env.FB_USER_ACCESS_TOKEN
 var user_location = ''
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
+
+const APP_ID = '1838086799794301'
+const APP_SECRET_CODE = 'a75994ad23cc7e040620f571d8c46092'
+const APP_ACCESS_TOKEN = FB.api(
+    "oauth/access_token",
+    {client_id: APP_ID, client_secret: APP_SECRET_CODE, grant_type: client_credentials},
+    function(response){
+    console.log('access_token: ', response);
+});
 
 app.get('/', function(req,res){
 	res.send('Hello Facebook chatbot!')
