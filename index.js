@@ -112,7 +112,9 @@ function sendLocation(recipientId){
     function(response){
         console.log('access_token: ', response);
 
-        FB.setAccessToken(response.access_token);
+        var APP_ACCESS_TOKEN = response.access_token.split("|");
+        console.log(APP_ACCESS_TOKEN)
+        FB.setAccessToken(APP_ACCESS_TOKEN[1]);
         
         FB.api('/me',  'GET',  {"fields":"id,name,location,devices"},  function(res) {
         if(!res || res.error) {
