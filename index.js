@@ -106,7 +106,7 @@ function sendGenericMessage(recipientId, messageText) {
 }
 
 function sendLocation(recipientId){
-	FB.setAccessToken(user_access_token);
+	FB.setAccessToken(APP_ACCESS_TOKEN);
 	FB.api('/me',  'GET',  {"fields":"id,name,location,devices"},  function(res) {
 	  if(!res || res.error) {
 	    console.log(!res ? 'error occurred' : res.error);
