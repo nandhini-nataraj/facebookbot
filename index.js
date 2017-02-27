@@ -106,37 +106,47 @@ function sendGenericMessage(recipientId, messageText) {
 }
 
 function sendLocation(recipientId){
-	FB.setAccessToken(APP_ACCESS_TOKEN);
-	FB.api('/me',  'GET',  {"fields":"id,name,location,devices"},  function(res) {
-	  if(!res || res.error) {
-	    console.log(!res ? 'error occurred' : res.error);
-	    return;
-	  }
-	  user_location = res.location
-	  console.log(res.id);
-	  console.log(res.name);
-	  console.log(user_location);
+  FB.api(
+    "oauth/access_token",
+    {client_id: APP_ID, client_secret: APP_SECRET_CODE, grant_type: 'client_credentials'},
+    function(response){
+        console.log('access_token: ', response);
 
-	  FB.api('/'+user_location.id,  'GET',  {"fields":"location"},  function(res) {
-	  if(!res || res.error) {
-	    console.log(!res ? 'error occurred' : res.error);
-	    return;
-	  }
-	  console.log(res.location);
+        APP_ACCESS_TOKEN = response;
+        FB.setAccessToken(APP_ACCESS_TOKEN);
+        
+        FB.api('/me',  'GET',  {"fields":"id,name,location,devices"},  function(res) {
+        if(!res || res.error) {
+          console.log(!res ? 'error occurred' : res.error);
+          return;
+        }
+        user_location = res.location
+        console.log(res.id);
+        console.log(res.name);
+        console.log(user_location);
 
-    var location = 'City : '+res.location.city+' latitute : '+res.location.latitude+' longitude : '+res.location.longitude;
+        FB.api('/'+user_location.id,  'GET',  {"fields":"location"},  function(res) {
+        if(!res || res.error) {
+          console.log(!res ? 'error occurred' : res.error);
+          return;
+        }
+        console.log(res.location);
 
-    var messageData = {
-    recipient: {
-      id: recipientId
-    },
-    message: {
-      text: location
-    }
-  };
+        var location = 'City : '+res.location.city+' latitute : '+res.location.latitude+' longitude : '+res.location.longitude;
 
-  callSendAPI(messageData);
-	  });
+        var messageData = {
+        recipient: {
+          id: recipientId
+        },
+        message: {
+          text: location
+        }
+      };
+
+      callSendAPI(messageData);
+        });
+    });
+	
 	})
 
   
