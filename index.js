@@ -129,7 +129,12 @@ function sendLocation(recipientId){
           id: recipientId
         },
         message: {
-          text: googlemap
+          text:'Please share your location:',
+          quick_replies:[
+            {
+              content_type:location,
+            }
+          ]
         }
       };
 
