@@ -10,7 +10,7 @@ const token = process.env.FB_VERIFY_TOKEN
 const access = process.env.FB_ACCESS_TOKEN
 //const user_access_token=process.env.FB_USER_ACCESS_TOKEN
 var user_location = ''
-var accessToken
+
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
@@ -103,32 +103,25 @@ function sendGenericMessage(recipientId, messageText) {
 }
 
 function sendLocation(recipientId){
- 
-        FB.getLoginStatus(function(response) {
-          if (response.status === 'connected') {
-            var accessToken = response.authResponse.accessToken;
-           
+	FB.setAccessToken(user_access_token);
+	FB.api('/me',  'GET',  {"fields":"id,name,location,devices"},  function(res) {
+	  if(!res || res.error) {
+	    console.log(!res ? 'error occurred' : res.error);
+	    return;
+	  }
+	  user_location = res.location
+	  console.log(res.id);
+	  console.log(res.name);
+	  console.log(user_location);
 
-        FB.setAccessToken(response);
-        
-        FB.api('/me',  'GET',  {"fields":"id,name,location,devices"},  function(res) {
-        if(!res || res.error) {
-          console.log(!res ? 'error occurred' : res.error);
-          return;
-        }
-        user_location = res.location
-        console.log(res.id);
-        console.log(res.name);
-        console.log(user_location);
+	  FB.api('/'+user_location.id,  'GET',  {"fields":"location"},  function(res) {
+	  if(!res || res.error) {
+	    console.log(!res ? 'error occurred' : res.error);
+	    return;
+	  }
+	  console.log(res.location.city);
 
-        FB.api('/'+user_location.id,  'GET',  {"fields":"location"},  function(res) {
-        if(!res || res.error) {
-          console.log(!res ? 'error occurred' : res.error);
-          return;
-        }
-        console.log(res.location);
-
-        var location = 'City : '+res.location.city+' latitute : '+res.location.latitude+' longitude : '+res.location.longitude;
+     var location = 'City : '+res.location.city+' latitute : '+res.location.latitude+' longitude : '+res.location.longitude;
 
         var messageData = {
         recipient: {
@@ -140,13 +133,11 @@ function sendLocation(recipientId){
       };
 
       callSendAPI(messageData);
-        });
-    }); 
-  } else {
-    console.log(response.status)
-  }
-});
+	  });
+	})
 }
+
+
 
 function sendTextMessage(recipientId, messageText) {	
   var messageData = {
