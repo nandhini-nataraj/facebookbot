@@ -122,13 +122,14 @@ function sendLocation(recipientId){
 	  console.log(res.location.city);
 
      var location = 'City : '+res.location.city+' latitute : '+res.location.latitude+' longitude : '+res.location.longitude;
+     var googlemap = 'http://maps.google.com/?q='+res.location.latitude+','+res.location.longitude;
 
         var messageData = {
         recipient: {
           id: recipientId
         },
         message: {
-          text: location
+          text: googlemap
         }
       };
 
