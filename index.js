@@ -142,7 +142,10 @@ function sendLocation(recipientId){
       callSendAPI(messageData);
         });
     }); 
-    }});
+  } else {
+    console.log(response.status)
+  }
+});
 }
 
 function sendTextMessage(recipientId, messageText) {	
