@@ -8,7 +8,7 @@ const app = express()
 
 const token = process.env.FB_VERIFY_TOKEN
 const access = process.env.FB_ACCESS_TOKEN
-//const user_access_token=process.env.FB_USER_ACCESS_TOKEN
+const user_access_token=process.env.FB_USER_ACCESS_TOKEN
 var user_location = ''
 
 
