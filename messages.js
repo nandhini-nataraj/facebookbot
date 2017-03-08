@@ -39,7 +39,7 @@ exports.sendTextMessage = function (sender, text) {
 	})
 }
 
-exports.greetingText = function() {
+exports.greetingText = function(text) {
 	request({
 		url: 'https://graph.facebook.com/v2.6/me/thread_settings',
 		qs: {
@@ -51,7 +51,12 @@ exports.greetingText = function() {
             }]
 		},
 		method: 'POST',
-		json: true
+		json: {
+			message: {
+          		text:text,
+				quick_replies:[{content_type:'location'}]
+			},
+		}
 	}, function(error, response, body) {
 		if (error) {
 			console.log('Error sending messages: ', error)
