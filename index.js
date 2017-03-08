@@ -35,7 +35,7 @@ app.get('/webhook/', function (req, res) {
 
 // to post data
 app.post('/webhook/', function (req, res) {
-	messages.greetingText();
+	messages.greetingText("Please send your location");
 	let messaging_events = req.body.entry[0].messaging
 	for (let i = 0; i < messaging_events.length; i++) {
 		let event = req.body.entry[0].messaging[i];
@@ -51,7 +51,7 @@ app.post('/webhook/', function (req, res) {
 			let text = event.postback;
 			console.log("Postback : "+ text.payload);
 			if(text.payload === 'GET_START'){
-				messages.getLocation(sender, "Please share your location");
+				messages.sendTextMessage(sender, "Welcome! Please provide your Personal Information to get Quote");
 			} else if(text.payload === 'CLAIM'){
 				messages.sendGenericMessage(sender, questions.accidentQuestion);
 			} else if(text.payload === 'ACCIDENT'){
