@@ -116,7 +116,7 @@ exports.breakdownNo = "Our Agent will be contacting you in few minutes. Agent co
 
 exports.agentContact = "Our Agent will be contacting you in few minutes. Agent contact no. XXX XXX XXXX for your reference."
 
-exports.otherPartyInjuredYes = meInjuredYes;
+exports.otherPartyInjuredYes = "Call 911";
 
 exports.otherPartyInjuredNo = {
 	"attachment":{
