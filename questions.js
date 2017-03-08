@@ -112,7 +112,7 @@ exports.meInjuredNo = {
 
 exports.breakdownYes = "We just processed On-road assistance service for you. XXX will be reaching you in X minutes. Contact : xxxxxxxx"
 
-exports.breakdownNo = agentContact;
+exports.breakdownNo = "Our Agent will be contacting you in few minutes. Agent contact no. XXX XXX XXXX for your reference.";
 
 exports.agentContact = "Our Agent will be contacting you in few minutes. Agent contact no. XXX XXX XXXX for your reference."
 
