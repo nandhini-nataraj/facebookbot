@@ -52,7 +52,7 @@ app.post('/webhook/', function (req, res) {
 			console.log("Attachments Length: "+event.message.attachments.length);
 			for (let i = 0; i < event.message.attachments.length; i++) {
 				console.log("Attachments Type: "+event.message.attachments[i].type);
-				if(event.message.attachments[i].type === 'image'){
+				if(event.message.attachments[i].type === 'image' || event.message.attachments[i].type === 'location'){
 					console.log("Attachments Type: "+event.message.attachments[i].payload.url);
 				}
 			}	
@@ -64,7 +64,7 @@ app.post('/webhook/', function (req, res) {
 			if(text.payload === 'GET_START'){
 				messages.sendTextMessage(sender, "Welcome! Please provide your Personal Information to get Quote");
 			} else if(text.payload === 'CLAIM'){
-				messages.getLocation(sender,'Please share your location');
+				messages.getLocation(sender,"Please share your location");
 				//messages.sendGenericMessage(sender, questions.accidentQuestion);
 			} else if(text.payload === 'ACCIDENT'){
 				messages.sendGenericMessage(sender, questions.accidentYes);
