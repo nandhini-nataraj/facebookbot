@@ -57,11 +57,9 @@ app.post('/webhook/', function (req, res) {
 						console.log("Attachments Type: "+event.message.attachments[i].payload.url);
 						break;
 					case 'location' :
-						console.log("Location details : " + JSON.stringify(event.message.attachments[i].payload.coordinates))
+						console.log("Location details : " + JSON.stringify(event.message.attachments[i].payload.coordinates))					
 				}
-				if(event.message.attachments[i].type === 'image' || event.message.attachments[i].type === 'location'){
-					console.log("Attachments Type: "+event.message.attachments[i].payload.url);
-				}
+				
 			}	
 		}
 		
