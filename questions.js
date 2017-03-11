@@ -5,7 +5,6 @@ exports.claimOrQuote = {
 					"template_type": "generic",
 					"elements": [{
 						"title": "Hi there, How may i help you?",
-						"image_url": "http://globaltoynews.typepad.com/.a/6a0133ec87bd6d970b0168ea4059ce970c-500wi",
 						"buttons": [{
 							"type": "postback",
 							"title": "Claim",
@@ -27,7 +26,6 @@ exports.accidentQuestion = {
 					"template_type": "generic",
 					"elements": [{
 						"title": "Did you met with an Accident?",
-						"image_url": "http://globaltoynews.typepad.com/.a/6a0133ec87bd6d970b0168ea4059ce970c-500wi",
 						"buttons": [{
 							"type": "postback",
 							"title": "Yes",
@@ -52,7 +50,7 @@ exports.accidentYes = {
           {
             "type":"postback",
             "title":"Yes",
-			"payload":"ME_INJURED_YES"
+			      "payload":"ME_INJURED_YES"
           },
           {
             "type":"postback",
@@ -74,7 +72,7 @@ exports.accidentNo = {
           {
             "type":"postback",
             "title":"Yes",
-			"payload":"BREAKDOWN_YES"
+			      "payload":"BREAKDOWN_YES"
           },
           {
             "type":"postback",
@@ -98,7 +96,7 @@ exports.meInjuredNo = {
           {
             "type":"postback",
             "title":"Yes",
-			"payload":"OTHER_PARTY_INJURED_YES"
+			      "payload":"OTHER_PARTY_INJURED_YES"
           },
           {
             "type":"postback",
@@ -112,11 +110,11 @@ exports.meInjuredNo = {
 
 exports.breakdownYes = "We just processed On-road assistance service for you. XXX will be reaching you in X minutes. Contact : xxxxxxxx"
 
-exports.breakdownNo = "Our Agent will be contacting you in few minutes. Agent contact no. XXX XXX XXXX for your reference.";
+exports.breakdownNo = exports.agentContact;
 
 exports.agentContact = "Our Agent will be contacting you in few minutes. Agent contact no. XXX XXX XXXX for your reference."
 
-exports.otherPartyInjuredYes = "Call 911";
+exports.otherPartyInjuredYes = exports.meInjuredYes;
 
 exports.otherPartyInjuredNo = {
 	"attachment":{
@@ -216,7 +214,11 @@ exports.towingNo = {
       }
     }
 }
-exports.towingYes = {
+
+exports.uploadDamageImages = "Please attach damaged car images using Messenger attachment option";
+
+/*
+exports.damagedPartsList = {
     "attachment": {
         "type": "template",
         "payload": {
@@ -285,6 +287,334 @@ exports.towingYes = {
     }
 }
 
+exports.damagedPartsList = {
+    "attachment": {
+        "type": "template",
+        "payload": {
+            "template_type": "list",
+            "top_element_style": "compact",
+            "elements": [
+                {
+                    "title": "Front-end parts",
+                    "image_url": "http://st.motortrend.com/uploads/sites/10/2015/09/2012-jaguar-XF-front-end-2.jpg",
+                    "subtitle": "Front Bumper, Front Wheels, Head Lights, Grille, Hood",
+                    "default_action": {
+                        "type": "web_url",
+                        "url": "https://peterssendreceiveapp.ngrok.io/view?item=100",
+                        "messenger_extensions": true,
+                        "webview_height_ratio": "tall",
+                        "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                    },
+                    "buttons": [
+                        {
+                          "type":"postback",
+                          "title":"Select",
+                          "payload":"FRONTEND_PARTS"
+                        }
+                    ]                
+                },
+                {
+                    "title": "Center parts",
+                    "image_url": "http://carnbikeexpert.com/wp-content/uploads/2016/01/Tata-Zica-Side-view.jpg",
+                    "subtitle": "Fender, Front Doors, Rear Doors, Roof",
+                    "default_action": {
+                        "type": "web_url",
+                        "url": "https://peterssendreceiveapp.ngrok.io/view?item=100",
+                        "messenger_extensions": true,
+                        "webview_height_ratio": "tall",
+                        "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                    },
+                    "buttons": [
+                        {
+                          "type":"postback",
+                          "title":"Select",
+                          "payload":"CENTER_PARTS"
+                        }
+                    ]                
+                },
+                {
+                    "title": "Rear-end parts",
+                    "image_url": "http://files.prokerala.com/automobile/images/photo/full/jaguar-xj-715/jaguar-xj-exterior-rear-view.jpg",
+                    "subtitle": "Rear Bumper, Rear Wheels, Tail lights, Trunk Lid, Exhaust",
+                    "default_action": {
+                        "type": "web_url",
+                        "url": "https://peterssendreceiveapp.ngrok.io/view?item=100",
+                        "messenger_extensions": true,
+                        "webview_height_ratio": "tall",
+                        "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                    },
+                    "buttons": [
+                        {
+                          "type":"postback",
+                          "title":"Select",
+                          "payload":"REAREND_PARTS"
+                        }
+                    ]                
+                }
+            ] 
+        }
+    }
+}
 
+exports.damagedPartsList = {
+    "attachment": {
+        "type": "template",
+        "payload": {
+            "template_type": "list",
+            "top_element_style": "compact",
+            "elements": [
+                {
+                    "title": "Front-end parts",
+                    "image_url": "http://st.motortrend.com/uploads/sites/10/2015/09/2012-jaguar-XF-front-end-2.jpg",
+                    "subtitle": "Front Bumper, Front Wheels, Head Lights, Grille, Hood",
+                    "default_action": {
+                        "type": "web_url",
+                        "url": "https://peterssendreceiveapp.ngrok.io/view?item=100",
+                        "messenger_extensions": true,
+                        "webview_height_ratio": "tall",
+                        "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                    },
+                    "buttons": [
+                        {
+                          "type":"postback",
+                          "title":"Select",
+                          "payload":"FRONTEND_PARTS"
+                        }
+                    ]                
+                },
+                {
+                    "title": "Center parts",
+                    "image_url": "http://carnbikeexpert.com/wp-content/uploads/2016/01/Tata-Zica-Side-view.jpg",
+                    "subtitle": "Fender, Front Doors, Rear Doors, Roof",
+                    "default_action": {
+                        "type": "web_url",
+                        "url": "https://peterssendreceiveapp.ngrok.io/view?item=100",
+                        "messenger_extensions": true,
+                        "webview_height_ratio": "tall",
+                        "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                    },
+                    "buttons": [
+                        {
+                          "type":"postback",
+                          "title":"Select",
+                          "payload":"CENTER_PARTS"
+                        }
+                    ]                
+                },
+                {
+                    "title": "Rear-end parts",
+                    "image_url": "http://files.prokerala.com/automobile/images/photo/full/jaguar-xj-715/jaguar-xj-exterior-rear-view.jpg",
+                    "subtitle": "Rear Bumper, Rear Wheels, Tail lights, Trunk Lid, Exhaust",
+                    "default_action": {
+                        "type": "web_url",
+                        "url": "https://peterssendreceiveapp.ngrok.io/view?item=100",
+                        "messenger_extensions": true,
+                        "webview_height_ratio": "tall",
+                        "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                    },
+                    "buttons": [
+                        {
+                          "type":"postback",
+                          "title":"Select",
+                          "payload":"REAREND_PARTS"
+                        }
+                    ]                
+                }
+            ] 
+        }
+    }
+}
 
+exports.frontendPartsList = {
+    "attachment": {
+        "type": "template",
+        "payload": {
+            "template_type": "list",
+            "top_element_style": "compact",
+            "elements": [
+                {
+                    "title": "Front Bumper",
+                    "image_url": "",
+                    "subtitle": "Multiple selection allowed",
+                    "buttons": [
+                        {
+                          "type":"postback",
+                          "title":"Select",
+                          "payload":"FRONTBUMPER"
+                        }
+                    ]                
+                },
+                {
+                    "title": "Front Wheels",
+                    "image_url": "",
+                    "subtitle": "Multiple selection allowed",
+                    "buttons": [
+                        {
+                          "type":"postback",
+                          "title":"Select",
+                          "payload":"FRONTWHEELS"
+                        }
+                    ]                
+                },
+                {
+                    "title": "Head Lights",
+                    "image_url": "",
+                    "subtitle": "Multiple selection allowed",
+                    "buttons": [
+                        {
+                          "type":"postback",
+                          "title":"Select",
+                          "payload":"HEADLIGHTS"
+                        }
+                    ]                
+                },
+                {
+                    "title": "Grille",
+                    "image_url": "",
+                    "subtitle": "Multiple selection allowed",
+                    "buttons": [
+                        {
+                          "type":"postback",
+                          "title":"Select",
+                          "payload":"GRILLE"
+                        }
+                    ]                
+                },
+                {
+                    "title": "Hood",
+                    "image_url": "",
+                    "subtitle": "Multiple selection allowed",
+                    "buttons": [
+                        {
+                          "type":"postback",
+                          "title":"Select",
+                          "payload":"HOOD"
+                        }
+                    ]                
+                }
+            ] 
+        }
+    }
+}
+
+exports.centerPartsList = {
+    "attachment": {
+        "type": "template",
+        "payload": {
+            "template_type": "list",
+            "top_element_style": "compact",
+            "elements": [
+                {
+                    "title": "Fender",
+                    "image_url": "",
+                    "subtitle": "Multiple selection allowed",
+                    "buttons": [
+                        {
+                          "type":"postback",
+                          "title":"Select",
+                          "payload":"FENDER"
+                        }
+                    ]                
+                },
+                {
+                    "title": "Front Doors",
+                    "image_url": "",
+                    "subtitle": "Multiple selection allowed",
+                    "buttons": [
+                        {
+                          "type":"postback",
+                          "title":"Select",
+                          "payload":"FRONTDOORS"
+                        }
+                    ]                
+                },
+                {
+                    "title": "Rear Doors",
+                    "image_url": "",
+                    "subtitle": "Multiple selection allowed",
+                    "buttons": [
+                        {
+                          "type":"postback",
+                          "title":"Select",
+                          "payload":"REARDOORS"
+                        }
+                    ]                
+                },
+                {
+                    "title": "Roof",
+                    "image_url": "",
+                    "subtitle": "Multiple selection allowed",
+                    "buttons": [
+                        {
+                          "type":"postback",
+                          "title":"Select",
+                          "payload":"ROOF"
+                        }
+                    ]                
+                }
+            ] 
+        }
+    }
+}
+
+exports.rearEndPartsList = {
+    "attachment": {
+        "type": "template",
+        "payload": {
+            "template_type": "list",
+            "top_element_style": "compact",
+            "elements": [
+                {
+                    "title": "Fender",
+                    "image_url": "",
+                    "subtitle": "Multiple selection allowed",
+                    "buttons": [
+                        {
+                          "type":"postback",
+                          "title":"Select",
+                          "payload":"FENDER"
+                        }
+                    ]                
+                },
+                {
+                    "title": "Front Doors",
+                    "image_url": "",
+                    "subtitle": "Multiple selection allowed",
+                    "buttons": [
+                        {
+                          "type":"postback",
+                          "title":"Select",
+                          "payload":"FRONTDOORS"
+                        }
+                    ]                
+                },
+                {
+                    "title": "Rear Doors",
+                    "image_url": "",
+                    "subtitle": "Multiple selection allowed",
+                    "buttons": [
+                        {
+                          "type":"postback",
+                          "title":"Select",
+                          "payload":"REARDOORS"
+                        }
+                    ]                
+                },
+                {
+                    "title": "Roof",
+                    "image_url": "",
+                    "subtitle": "Multiple selection allowed",
+                    "buttons": [
+                        {
+                          "type":"postback",
+                          "title":"Select",
+                          "payload":"ROOF"
+                        }
+                    ]                
+                }
+            ] 
+        }
+    }
+}
+*/
 

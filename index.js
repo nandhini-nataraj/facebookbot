@@ -1,5 +1,6 @@
 'use strict'
 const express = require('express')
+require('now-logs')('mykey');
 const bodyParser = require('body-parser')
 const request = require('request')
 const messages = require('./messages.js');
@@ -8,7 +9,6 @@ const app = express();
 var http    = require( 'http' );
 var arr = [];
 var count = 0;
-
 const token = process.env.FB_VERIFY_TOKEN
 
 app.set('port', (process.env.PORT || 8080))
@@ -27,7 +27,7 @@ app.get('/', function (req, res) {
 // for facebook verification
 app.get('/webhook/', function (req, res) {
 	console.log("Get webhook : "+req.query['hub.verify_token']);
-	if (req.query['hub.verify_token'] === token) {
+	if (req.query['hub.verify_token'] === 'my_voice_is_my_password_verify_me') {
 		res.send(req.query['hub.challenge'])
 	}
 	res.send('Error, wrong token')
@@ -35,7 +35,7 @@ app.get('/webhook/', function (req, res) {
 
 // to post data
 app.post('/webhook/', function (req, res) {
-	messages.greetingText("Please send your location");
+	messages.greetingText();
 	let messaging_events = req.body.entry[0].messaging
 	for (let i = 0; i < messaging_events.length; i++) {
 		let event = req.body.entry[0].messaging[i];
@@ -47,6 +47,17 @@ app.post('/webhook/', function (req, res) {
 			if(text === 'RESET') count = 0;
 			arr.push(text);
 		}
+				
+		if (event.message && event.message.attachments) {
+			console.log("Attachments Length: "+event.message.attachments.length);
+			for (let i = 0; i < event.message.attachments.length; i++) {
+				console.log("Attachments Type: "+event.message.attachments[i].type);
+				if(event.message.attachments[i].type === 'image'){
+					console.log("Attachments Type: "+event.message.attachments[i].payload.url);
+				}
+			}	
+		}
+		
 		if (event.postback) {
 			let text = event.postback;
 			console.log("Postback : "+ text.payload);
@@ -79,20 +90,12 @@ app.post('/webhook/', function (req, res) {
 			} else if(text.payload === 'TOWING_NO'){
 				messages.sendGenericMessage(sender, questions.towingNo);
 			} else if(text.payload === 'GET_DAMAGE_DETAILS'){
-				messages.sendGenericMessage(sender, questions.damagedPartsList);
-			} else if(text.payload === 'FRONTEND_PARTS'){
-				messages.sendGenericMessage(sender, questions.frontEndParts); //TODO
-			} else if(text.payload === 'CENTER_PARTS'){
-				messages.sendGenericMessage(sender, questions.centerParts); //TODO
-			} else if(text.payload === 'REAREND_PARTS'){
-				messages.sendGenericMessage(sender, questions.rearEndParts); //TODO
+				messages.sendTextMessage(sender, questions.uploadDamageImages);
 			} 
 			//TODO bodyshop
 			//TODO schedule rental
 			//TODO ClaimDetials
 			//TODO other car damaged
-			
-			
 			continue
 		}
 	}
@@ -102,6 +105,7 @@ app.post('/webhook/', function (req, res) {
 function start(id) {
   if (count == 1) {
     messages.sendGenericMessage(id, questions.claimOrQuote);
+		messages.whitelistURL();
   } else if (count == 3) {
     messages.sendGenericMessage(id, questions.claimOrQuote);
   } else if (count == 5) {

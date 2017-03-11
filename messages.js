@@ -19,6 +19,25 @@ exports.sendGenericMessage = function (sender, messageData) {
 	})
 }
 
+exports.whitelistURL = function (){
+	request({
+		url: 'https://graph.facebook.com/v2.6/me/thread_settings',
+		qs: {access_token:token},
+		method: 'POST',
+		json: {
+			setting_type: "domain_whitelisting",
+			whitelisted_domains: ["https://peterssendreceiveapp.ngrok.io"],
+			domain_action_type: "add"
+		}
+	}, function(error, response, body) {
+		if (error) {
+			console.log('Error sending messages: ', error)
+		} else if (response.body.error) {
+			console.log('Error: ', response.body.error)
+		}
+	})
+}
+
 exports.sendTextMessage = function (sender, text) {
 	let messageData = { text:text }
 	
@@ -39,7 +58,7 @@ exports.sendTextMessage = function (sender, text) {
 	})
 }
 
-exports.greetingText = function(text) {
+exports.greetingText = function() {
 	request({
 		url: 'https://graph.facebook.com/v2.6/me/thread_settings',
 		qs: {
@@ -51,12 +70,7 @@ exports.greetingText = function(text) {
             }]
 		},
 		method: 'POST',
-		json: {
-			message: {
-          		text:text,
-				quick_replies:[{content_type:'location'}]
-			},
-		}
+		json: true
 	}, function(error, response, body) {
 		if (error) {
 			console.log('Error sending messages: ', error)
