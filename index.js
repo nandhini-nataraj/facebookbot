@@ -27,7 +27,7 @@ app.get('/', function (req, res) {
 // for facebook verification
 app.get('/webhook/', function (req, res) {
 	console.log("Get webhook : "+req.query['hub.verify_token']);
-	if (req.query['hub.verify_token'] === 'my_voice_is_my_password_verify_me') {
+	if (req.query['hub.verify_token'] === token) {
 		res.send(req.query['hub.challenge'])
 	}
 	res.send('Error, wrong token')
@@ -64,7 +64,8 @@ app.post('/webhook/', function (req, res) {
 			if(text.payload === 'GET_START'){
 				messages.sendTextMessage(sender, "Welcome! Please provide your Personal Information to get Quote");
 			} else if(text.payload === 'CLAIM'){
-				messages.sendGenericMessage(sender, questions.accidentQuestion);
+				messages.getLocation(sender,'Please share your location');
+				//messages.sendGenericMessage(sender, questions.accidentQuestion);
 			} else if(text.payload === 'ACCIDENT'){
 				messages.sendGenericMessage(sender, questions.accidentYes);
 			} else if(text.payload === 'NO_ACCIDENT'){
@@ -103,6 +104,7 @@ app.post('/webhook/', function (req, res) {
 })
 
 function start(id) {
+	console.log('count: '+count)
   if (count == 1) {
     messages.sendGenericMessage(id, questions.claimOrQuote);
 		messages.whitelistURL();
