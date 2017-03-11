@@ -57,7 +57,8 @@ app.post('/webhook/', function (req, res) {
 						console.log("Attachments Type: "+event.message.attachments[i].payload.url);
 						break;
 					case 'location' :
-						console.log("Location details : " + JSON.stringify(event.message.attachments[i].payload.coordinates))					
+						console.log("Location details : " + JSON.stringify(event.message.attachments[i].payload.coordinates))	
+						messages.sendGenericMessage(sender, questions.accidentYes);				
 				}
 				
 			}	
@@ -68,11 +69,10 @@ app.post('/webhook/', function (req, res) {
 			console.log("Postback : "+ text.payload);
 			if(text.payload === 'GET_START'){
 				messages.sendTextMessage(sender, "Welcome! Please provide your Personal Information to get Quote");
-			} else if(text.payload === 'CLAIM'){
-				messages.getLocation(sender,"Please share your location");
-				//messages.sendGenericMessage(sender, questions.accidentQuestion);
+			} else if(text.payload === 'CLAIM'){		
+				messages.sendGenericMessage(sender, questions.accidentQuestion);
 			} else if(text.payload === 'ACCIDENT'){
-				messages.sendGenericMessage(sender, questions.accidentYes);
+				messages.getLocation(sender,"Please share your location");				
 			} else if(text.payload === 'NO_ACCIDENT'){
 				messages.sendGenericMessage(sender, questions.accidentNo);
 			} else if(text.payload === 'ME_INJURED_YES'){
