@@ -52,8 +52,15 @@ app.post('/webhook/', function (req, res) {
 			console.log("Attachments Length: "+event.message.attachments.length);
 			for (let i = 0; i < event.message.attachments.length; i++) {
 				console.log("Attachments Type: "+event.message.attachments[i].type);
+				switch (event.message.attachments[i].type){
+					case 'image' : 
+						console.log("Attachments Type: "+event.message.attachments[i].payload.url);
+						break;
+					case 'location' :
+						console.log("Location details : " + JSON.stringify(event.message.attachments[i].payload.coordinates))
+				}
 				if(event.message.attachments[i].type === 'image' || event.message.attachments[i].type === 'location'){
-					console.log("Attachments Type: "+JSON.stringify(event.message.attachments[i]));
+					console.log("Attachments Type: "+event.message.attachments[i].payload.url);
 				}
 			}	
 		}
