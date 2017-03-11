@@ -53,7 +53,7 @@ app.post('/webhook/', function (req, res) {
 			for (let i = 0; i < event.message.attachments.length; i++) {
 				console.log("Attachments Type: "+event.message.attachments[i].type);
 				if(event.message.attachments[i].type === 'image' || event.message.attachments[i].type === 'location'){
-					console.log("Attachments Type: "+event.message.attachments[i]);
+					console.log("Attachments Type: "+JSON.stringify(event.message.attachments[i]));
 				}
 			}	
 		}
