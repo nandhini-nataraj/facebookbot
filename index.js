@@ -8,7 +8,7 @@ const questions = require('./questions.js');
 const app = express();
 var http    = require( 'http' );
 var arr = [];
-var count = 0;
+var count = 1;
 const token = process.env.FB_VERIFY_TOKEN
 
 app.set('port', (process.env.PORT || 8080))
@@ -44,7 +44,7 @@ app.post('/webhook/', function (req, res) {
 			start(sender);
 			count +=1;
 			let text = event.message.text;
-			if(text === 'RESET') count = 0;
+			if(text === 'RESET') count = 1;
 			arr.push(text);
 		}
 				
@@ -53,11 +53,8 @@ app.post('/webhook/', function (req, res) {
 			for (let i = 0; i < event.message.attachments.length; i++) {
 				console.log("Attachments Type: "+event.message.attachments[i].type);
 				switch (event.message.attachments[i].type){
-					case 'image' : 
-						console.log("Attachments Type: "+event.message.attachments[i].payload.url);
-						break;
-					case 'location' :
-						console.log("Location details : " + JSON.stringify(event.message.attachments[i].payload.coordinates))	
+					case 'image': console.log("Attachments Type: "+event.message.attachments[i].payload.url);break;
+					case 'location':	console.log("Location details : " + JSON.stringify(event.message.attachments[i].payload.coordinates))	
 						messages.sendGenericMessage(sender, questions.accidentYes);				
 				}
 				
