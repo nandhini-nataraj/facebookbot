@@ -58,15 +58,14 @@ exports.sendTextMessage = function (sender, text) {
 	})
 }
 
-exports.greetingText = function() {
+exports.getStarted = function() {
 	request({
 		url: 'https://graph.facebook.com/v2.6/me/thread_settings',
 		qs: {
 			access_token:token,
 			setting_type: 'call_to_actions',
         	thread_state: 'new_thread',
-			greeting:{text:"Hi {{user_first_name}}!, welcome to our bot. Our bot helps you to initiate a Claim instantly anywhere.. anytime.."},
-            call_to_actions: [{
+			call_to_actions: [{
                 payload: 'CLAIM'
             }]
 		},
@@ -81,6 +80,24 @@ exports.greetingText = function() {
 	});
 }
 
+exports.greetingText = function() {
+	request({
+		url: 'https://graph.facebook.com/v2.6/me/thread_settings',
+		qs: {
+			access_token:token,
+			setting_type: 'greeting',
+			greeting:{text:"Hi {{user_first_name}}!, welcome to our bot. Our bot helps you to initiate a Claim instantly anywhere.. anytime.."},
+		},
+		method: 'POST',
+		json: true
+	}, function(error, response, body) {
+		if (error) {
+			console.log('Error sending messages: ', error)
+		} else if (response.body.error) {
+			console.log('Error: ', response.body.error)
+		}
+	});
+}
 
 exports.getLocation = function (sender, text) {
 	
