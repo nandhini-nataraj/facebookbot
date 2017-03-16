@@ -58,7 +58,7 @@ exports.sendTextMessage = function (sender, text) {
 	})
 }
 
-exports.greetingText = function() {
+exports.getStarted = function() {
 	request({
 		url: 'https://graph.facebook.com/v2.6/me/thread_settings',
 		qs: {
@@ -66,7 +66,7 @@ exports.greetingText = function() {
 			setting_type: 'call_to_actions',
         	thread_state: 'new_thread',
             call_to_actions: [{
-                payload: 'GET_START'
+                payload: 'GET_STARTED'
             }]
 		},
 		method: 'POST',
@@ -80,6 +80,24 @@ exports.greetingText = function() {
 	});
 }
 
+exports.greetingText = function() {
+	request({
+		url: 'https://graph.facebook.com/v2.6/me/thread_settings',
+		qs: {
+			access_token:token, 
+			setting_type: 'greeting',
+        	greeting:{text:'Raise a claim instantly!'}
+		},
+		method: 'POST',
+		json: true
+	}, function(error, response, body) {
+		if (error) {
+			console.log('Error sending messages: ', error)
+		} else if (response.body.error) {
+			console.log('Error: ', response.body.error)
+		}
+	});
+}
 exports.getLocation = function (sender, text) {
 	
 	request({
