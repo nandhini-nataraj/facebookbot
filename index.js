@@ -35,8 +35,8 @@ app.get('/webhook/', function (req, res) {
 
 // to post data
 app.post('/webhook/', function (req, res) {
-	messages.greetingText();
-	console.log('greeting text executed')
+	//messages.greetingText();
+	//console.log('greeting text executed');
 	messages.getStarted();
 	
 	let messaging_events = req.body.entry[0].messaging

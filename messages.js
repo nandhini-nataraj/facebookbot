@@ -65,6 +65,7 @@ exports.getStarted = function() {
 			access_token:token,
 			setting_type: 'call_to_actions',
         	thread_state: 'new_thread',
+			greeting:{text:"Hi {{user_first_name}}, welcome to this bot."},
             call_to_actions: [{
                 payload: 'CLAIM'
             }]
