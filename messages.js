@@ -66,7 +66,7 @@ exports.getStarted = function() {
 			setting_type: 'call_to_actions',
         	thread_state: 'new_thread',
             call_to_actions: [{
-                payload: 'GET_STARTED'
+                payload: 'CLAIM'
             }]
 		},
 		method: 'POST',
@@ -86,10 +86,9 @@ exports.greetingText = function() {
 		qs: {
 			access_token:token, 
 			setting_type: 'greeting',
-        	greeting:{text:'Raise a claim instantly!'}
+        	greeting:{text:"Hi {{user_first_name}}, welcome to this bot."}
 		},
 		method: 'POST',
-		json: true
 	}, function(error, response, body) {
 		if (error) {
 			console.log('Error sending messages: ', error)
