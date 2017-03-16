@@ -36,7 +36,7 @@ app.get('/webhook/', function (req, res) {
 // to post data
 app.post('/webhook/', function (req, res) {
 	messages.greetingText();
-	messages.getStarted();
+	
 	let messaging_events = req.body.entry[0].messaging
 	for (let i = 0; i < messaging_events.length; i++) {
 		let event = req.body.entry[0].messaging[i];
@@ -66,7 +66,7 @@ app.post('/webhook/', function (req, res) {
 			let text = event.postback;
 			console.log("Postback : "+ text.payload);
 			if(text.payload === 'GET_START'){
-				messages.sendTextMessage(sender, "Welcome! Please provide your Personal Information to get Quote");
+				messages.getStarted();
 			} else if(text.payload === 'CLAIM'){		
 				messages.sendGenericMessage(sender, questions.accidentQuestion);
 			} else if(text.payload === 'ACCIDENT'){

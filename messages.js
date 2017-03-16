@@ -82,13 +82,14 @@ exports.getStarted = function() {
 
 exports.greetingText = function() {
 	request({
-		url: 'https://graph.facebook.com/v2.6/me/thread_settings',
+		url: 'https://graph.facebook.com/v2.6/me/messenger_profile',
 		qs: {
 			access_token:token,
 			setting_type: 'greeting',
 			greeting:{text:"Hi {{user_first_name}}!, welcome to our bot. Our bot helps you to initiate a Claim instantly anywhere.. anytime.."},
+			get_started:{"payload":"GET_STARTED"}
 		},
-		method: 'POST',
+		method: 'GET',
 		json: true
 	}, function(error, response, body) {
 		if (error) {
