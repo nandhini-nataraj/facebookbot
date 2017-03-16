@@ -87,7 +87,7 @@ exports.greetingText = function() {
 			access_token:token,
 			setting_type: 'greeting',
 			greeting:{text:"Hi {{user_first_name}}!, welcome to our bot. Our bot helps you to initiate a Claim instantly anywhere.. anytime.."},
-			get_started:{"payload":"GET_STARTED"}
+			get_started:{payload:"GET_START"}
 		},
 		method: 'GET',
 		json: true
